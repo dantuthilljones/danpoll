@@ -11,15 +11,20 @@ jobs:
           go-version: 1.19
       - name: Install dependencies
         working-directory: ./server
-        run: go get dan-poll-server 
-      - name: Build
-        working-directory: ./server
-        run: go build -v ./...
+        run: go get dan-poll-server
       - name: Test with Go
         working-directory: ./server
-        run: go test -json > TestResults.json
+        run: go test ./dan-poll-server -json-json > TestResults.json
       - name: Upload Go test results
         uses: actions/upload-artifact@v3
         with:
           name: Go-results
           path: TestResults.json
+      - name: Build
+        working-directory: ./server
+        run: go build -o dan-poll-server-executable -v ./... 
+      - name: Upload Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Executable
+          path: dan-poll-server-executable
