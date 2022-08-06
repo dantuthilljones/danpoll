@@ -14,11 +14,9 @@ jobs:
         run: go get ./...
       - name: Test with Go
         working-directory: server
-        run: |
-          go test ./... -json > TestResults.json
-          ls -l
-          cat TestResults.json
+        run: go test ./... -json > TestResults.json
       - name: Upload Go test results
+        working-directory: server
         uses: actions/upload-artifact@v3
         with:
           name: Go-results
@@ -27,6 +25,7 @@ jobs:
         working-directory: server
         run: go build -o dan-poll-server-executable -v ./...
       - name: Upload Build
+        working-directory: server
         uses: actions/upload-artifact@v3
         with:
           name: Executable
