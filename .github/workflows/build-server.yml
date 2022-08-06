@@ -14,7 +14,7 @@ jobs:
         run: go get dan-poll-server
       - name: Test with Go
         working-directory: ./server
-        run: go test ./dan-poll-server -json-json > TestResults.json
+        run: go test ./dan-poll-server -json > TestResults.json
       - name: Upload Go test results
         uses: actions/upload-artifact@v3
         with:
