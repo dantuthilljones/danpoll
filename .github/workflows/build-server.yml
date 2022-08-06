@@ -11,7 +11,7 @@ jobs:
           go-version: 1.19
       - name: Install dependencies
         working-directory: ./server
-        run: go get .
+        run: go get dan-poll-server 
       - name: Build
         working-directory: ./server
         run: go build -v ./...
