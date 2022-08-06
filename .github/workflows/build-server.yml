@@ -1,0 +1,26 @@
+name: Build & Test dan-poll-server
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Install dependencies
+        working-directory: ./server
+        run: go get .
+      - name: Build
+        working-directory: ./server
+        run: go build -v ./...
+      - name: Test with Go
+        working-directory: ./server
+        run: go test -json > TestResults.json
+      - name: Upload Go test results
+        working-directory: ./server
+        uses: actions/upload-artifact@v3
+        with:
+          name: Go-results
+          path: TestResults.json
