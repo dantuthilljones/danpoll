@@ -19,7 +19,7 @@ jobs:
         working-directory: ./server
         run: go test -json > TestResults.json
       - name: Upload Go test results
-        working-directory: ./server
         uses: actions/upload-artifact@v3
         with:
+          name: Go-results
           path: TestResults.json
